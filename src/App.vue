@@ -1,12 +1,27 @@
-<script setup>
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from "./components/HelloWorld.vue";
+
+
+<script>
+import Board from "./components/Board.vue";
+import Scoreboard from "./components/Scoreboard.vue";
+export default {
+  data() {
+    return {
+      xScore: 0,
+      oScore: 0,
+    };
+  },
+  methods: {
+    addScore(winner) {
+      winner === "x-sign" ? this.xScore++ : this.oScore++;
+    },
+  },
+  components: { Board, Scoreboard },
+};
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + Vite" />
+  <Scoreboard :xScore="xScore" :oScore="oScore" />
+  <Board @score="addScore" />
 </template>
 
 <style>
@@ -17,5 +32,8 @@ import HelloWorld from "./components/HelloWorld.vue";
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  display: grid;
+  align-items: center;
+  justify-content: center;
 }
 </style>
